@@ -4,5 +4,8 @@ include_directories(${PROJECT_SRC_PATH}/hooker)
 
 set(LIB_SRC Hooker.cpp Hooker.h HookerFactory.cpp HookerFactory.h HookerX64.cpp HookerX64.h HookerX86.cpp HookerX86.h HookerArm.cpp HookerArm.h HookerThumb.cpp HookerThumb.h)
 
-add_library(inline-hook SHARED ${LIB_SRC})
-
+if(DEFINED INLINE_HOOK_TYPE)
+	add_library(inline-hook ${INLINE_HOOK_TYPE} ${LIB_SRC})
+else()
+	add_library(inline-hook SHARED ${LIB_SRC})
+endif()
